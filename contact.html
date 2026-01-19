@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Réveille Ton Potentiel</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4A6FA5;
+            --accent: #050505;
+            --dark: #333333;
+            --light: #FFFFFF;
+            --gray: #6C757D;
+            --light-gray: #F8F9FA;
+            --border: #E0E0E0;
+            --border-gray: #DEE2E6;
+            --success: #28A745;
+            --warning: #FFC107;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white !important;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .navbar-brand span {
+            color: var(--accent);
+        }
+        
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent) !important;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #3A5F95;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .contact-hero {
+            background: var(--light-gray);
+            padding: 120px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .contact-form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            border: 2px solid var(--border-gray);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-options {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid var(--border-gray);
+            height: 100%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-gray);
+        }
+        
+        /* Form Styling */
+        .form-control, .form-select, textarea {
+            background: white;
+            border: 2px solid var(--border-gray);
+            color: var(--dark);
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
+            background: white;
+        }
+        
+        .form-floating label {
+            color: var(--gray);
+        }
+        
+        .btn-contact {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            width: 100%;
+            border: 2px solid var(--border-gray);
+        }
+        
+        .btn-contact:hover {
+            background: #3A5F95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 111, 165, 0.2);
+        }
+        
+        .btn-contact:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid #1da851;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #1da851;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Alerts */
+        .alert-success-custom {
+            background: rgba(40, 167, 69, 0.1);
+            border: 2px solid rgba(40, 167, 69, 0.3);
+            color: var(--dark);
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .alert-error-custom {
+            background: rgba(220, 53, 69, 0.1);
+            border: 2px solid rgba(220, 53, 69, 0.3);
+            color: var(--dark);
+            border-radius: 10px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        /* Contact Info Items */
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .contact-info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: var(--light-gray);
+            padding: 80px 0;
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .accordion-item {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .accordion-button {
+            background: white;
+            color: var(--dark);
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: rgba(74, 111, 165, 0.1);
+            color: var(--primary);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1A1A1A;
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-title {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        /* Spinner Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 100px 0 40px;
+            }
+            
+            .contact-form-card, .contact-options {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-brain me-2"></i>ART-<span>ORATOIRE</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="apropos.html">À Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="index.html#acheter">Acheter Maintenant</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-2 fw-bold mb-4 text-dark">Contactez-<span style="color: var(--accent);">nous</span></h1>
+                    <p class="lead mb-4 text-dark">
+                        Nous sommes là pour répondre à toutes vos questions et vous accompagner dans votre transformation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <!-- Informations de contact -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="contact-options h-100">
+                        <h3 class="text-dark mb-4">Contact direct</h3>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-icon me-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-dark">Email</h5>
+                                <p class="text-dark mb-2">Réponse rapide garantie</p>
+                                <a href="mailto:Rasscollab@gmail.com" class="text-primary text-decoration-none">
+                                    Rasscollab@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-icon me-4">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-dark">WhatsApp</h5>
+                                <p class="text-dark mb-2">Réponse en direct</p>
+                                <a href="https://wa.me/775763575" target="_blank" class="whatsapp-btn">
+                                    <i class="fab fa-whatsapp"></i> Nous écrire sur WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-icon me-4">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-dark">Téléphone</h5>
+                                
+                                <p class="text-primary mb-0">+221 77 576 35 75</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <h5 class="text-dark mb-3">Temps de réponse</h5>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-bolt text-warning me-3"></i>
+                                <div>
+                                    <small class="text-dark">WhatsApp :</small>
+                                    <p class="text-dark mb-0">Moins de 15 minutes</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-clock text-primary me-3"></i>
+                                <div>
+                                    <small class="text-dark">Email :</small>
+                                    <p class="text-dark mb-0">Moins de 24 heures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulaire de contact -->
+                <div class="col-lg-8">
+                    <div class="contact-form-card">
+                        <h3 class="text-dark mb-4">Envoyez-nous un message</h3>
+                        <p class="text-dark mb-4">
+                            Remplissez ce formulaire et nous vous répondrons par email dans les plus brefs délais.
+                        </p>
+                        
+                        <!-- Messages d'alerte -->
+                        <div class="alert alert-success-custom mb-4 d-none" id="successAlert">
+                            <div class="d-flex">
+                                <i class="fas fa-check-circle fa-2x me-3 mt-1 text-success"></i>
+                                <div>
+                                    <h5 class="mb-1 text-dark">Message envoyé avec succès !</h5>
+                                    <p class="mb-0 text-dark">
+                                        Merci pour votre message. Nous vous répondrons dans les plus brefs délais à l'adresse email fournie.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-error-custom mb-4 d-none" id="errorAlert">
+                            <div class="d-flex">
+                                <i class="fas fa-exclamation-triangle fa-2x me-3 mt-1 text-danger"></i>
+                                <div>
+                                    <h5 class="mb-1 text-dark">Une erreur est survenue</h5>
+                                    <p class="mb-0 text-dark" id="errorMessage">
+                                        Veuillez réessayer ou nous contacter directement par WhatsApp.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Formulaire -->
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="firstName" name="firstName" 
+                                               placeholder="Votre prénom" required>
+                                        <label for="firstName">Votre prénom *</label>
+                                        <div class="invalid-feedback d-none" id="firstNameError">
+                                            Veuillez entrer votre prénom (minimum 2 caractères).
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="lastName" name="lastName" 
+                                               placeholder="Votre nom" required>
+                                        <label for="lastName">Votre nom *</label>
+                                        <div class="invalid-feedback d-none" id="lastNameError">
+                                            Veuillez entrer votre nom (minimum 2 caractères).
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           placeholder="Votre email" required>
+                                    <label for="email">Votre email *</label>
+                                    <div class="invalid-feedback d-none" id="emailError">
+                                        Veuillez entrer une adresse email valide.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="phone" name="phone" 
+                                           placeholder="Votre téléphone">
+                                    <label for="phone">Votre téléphone (optionnel)</label>
+                                    <div class="invalid-feedback d-none" id="phoneError">
+                                        Format de téléphone invalide.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <select class="form-select" id="subject" name="subject" required>
+                                        <option value="" selected disabled>Sélectionnez un sujet</option>
+                                        <option value="support">Support technique</option>
+                                        <option value="book">Question sur le livre</option>
+                                        <option value="payment">Problème de paiement</option>
+                                        <option value="partnership">Proposition de partenariat</option>
+                                        <option value="other">Autre sujet</option>
+                                    </select>
+                                    <label for="subject">Sujet de votre message *</label>
+                                    <div class="invalid-feedback d-none" id="subjectError">
+                                        Veuillez sélectionner un sujet.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" name="message" 
+                                              placeholder="Votre message" style="height: 150px" required></textarea>
+                                    <label for="message">Votre message *</label>
+                                    <div class="invalid-feedback d-none" id="messageError">
+                                        Le message doit contenir au moins 10 caractères.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" value="yes">
+                                <label class="form-check-label text-dark" for="newsletter">
+                                    Je souhaite recevoir des conseils gratuits et des offres spéciales par email
+                                </label>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn-contact" id="submitBtn">
+                                    <span id="submitText">
+                                        <i class="fas fa-paper-plane me-2"></i>ENVOYER LE MESSAGE
+                                    </span>
+                                    <span id="submitLoading" class="d-none">
+                                        <i class="fas fa-spinner spinner me-2"></i>ENVOI EN COURS...
+                                    </span>
+                                </button>
+                            </div>
+                            
+                            <div class="mt-3 text-center">
+                                <small class="text-gray">
+                                    <i class="fas fa-lock me-1"></i>
+                                    Vos informations sont traitées de manière confidentielle
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="display-4 fw-bold text-dark text-center mb-5">
+                Questions <span class="text-primary">fréquentes</span>
+            </h2>
+            
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <i class="fas fa-envelope me-3 text-primary"></i>
+                            Quand recevrai-je une réponse ?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-dark">
+                            Nous nous engageons à répondre à tous les emails dans les <strong class="text-primary">24 heures</strong>.
+                            Pour une réponse plus rapide, contactez-nous directement sur WhatsApp.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <i class="fas fa-question-circle me-3 text-primary"></i>
+                            Que faire si je ne reçois pas de réponse ?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-dark">
+                            Vérifiez votre dossier spam. Si notre réponse n'y est pas, contactez-nous directement sur WhatsApp au 
+                            <strong class="text-primary">+221 77 576 35 75</strong>.
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+     <!-- Footer -->
+     <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="footer-title">Auteur:Mouhamadou.R.SONKO</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7);" class="mb-4">
+                        Ameliorer votre communication avec des methodes simples et pratiques  .
+                    </p>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="footer-link">Accueil</a></li>
+                        <li class="mb-2"><a href="apropos.html" class="footer-link">À Propos</a></li>
+                        <li class="mb-2"><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="contact.html" class="footer-link">Contactez-nous</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3" style="color: rgba(255, 255, 255, 0.7);">
+                            <i class="fas fa-envelope me-2" style="color: var(--accent);"></i>
+                            Rasscollab@gmail.com
+                        </li>
+                        <li class="mb-3" style="color: rgba(255, 255, 255, 0.7);">
+                            <i class="fab fa-whatsapp me-2" style="color: #25D366;"></i>
+                            +221 77 576 35 75 
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+            
+            <hr style="background: rgba(255, 255, 255, 0.1); margin: 40px 0;">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="color: rgba(255, 255, 255, 0.7);">
+                        &copy; 2026 Comment Parler en Public . Tous droits réservés.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="25" alt="Mastercard">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script pour le formulaire de contact -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoading = document.getElementById('submitLoading');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Votre adresse email
+            const YOUR_EMAIL = 'hniang400@gmail.com';
+            
+            // Validation en temps réel
+            setupRealTimeValidation();
+            
+            // Soumission du formulaire
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Valider le formulaire
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Afficher l'état de chargement
+                setLoading(true);
+                
+                // Récupérer les données du formulaire
+                const formData = getFormData();
+                
+                try {
+                    // Envoyer l'email
+                    await sendEmail(formData);
+                    
+                    // Afficher le succès
+                    showSuccess();
+                    
+                    // Réinitialiser le formulaire
+                    contactForm.reset();
+                    
+                    // Scroll vers le haut
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                } catch (error) {
+                    // Afficher l'erreur
+                    showError(error.message || 'Une erreur est survenue lors de l\'envoi.');
+                    console.error('Erreur d\'envoi:', error);
+                    
+                } finally {
+                    // Cacher l'état de chargement
+                    setLoading(false);
+                }
+            });
+            
+            function setupRealTimeValidation() {
+                const inputs = contactForm.querySelectorAll('input, select, textarea');
+                
+                inputs.forEach(input => {
+                    input.addEventListener('blur', function() {
+                        validateField(this);
+                    });
+                    
+                    input.addEventListener('input', function() {
+                        clearFieldError(this);
+                    });
+                });
+            }
+            
+            function validateForm() {
+                let isValid = true;
+                
+                const fields = [
+                    { id: 'firstName', min: 2 },
+                    { id: 'lastName', min: 2 },
+                    { id: 'email', type: 'email' },
+                    { id: 'phone', type: 'phone', optional: true },
+                    { id: 'subject' },
+                    { id: 'message', min: 10 }
+                ];
+                
+                fields.forEach(field => {
+                    const element = document.getElementById(field.id);
+                    if (!validateField(element, field)) {
+                        isValid = false;
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            function validateField(field, options = {}) {
+                const value = field.value.trim();
+                const fieldId = field.id;
+                const errorElement = document.getElementById(fieldId + 'Error');
+                
+                clearFieldError(field);
+                
+                let isValid = true;
+                let error = '';
+                
+                if (!options.optional && !value) {
+                    isValid = false;
+                    error = 'Ce champ est obligatoire.';
+                } else if (value) {
+                    switch(fieldId) {
+                        case 'firstName':
+                        case 'lastName':
+                            if (value.length < (options.min || 2)) {
+                                isValid = false;
+                                error = `Minimum ${options.min} caractères.`;
+                            }
+                            break;
+                            
+                        case 'email':
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(value)) {
+                                isValid = false;
+                                error = 'Adresse email invalide.';
+                            }
+                            break;
+                            
+                        case 'phone':
+                            if (value) {
+                                const phoneRegex = /^[+\d\s\-()]{8,20}$/;
+                                const cleanPhone = value.replace(/\s/g, '');
+                                if (!phoneRegex.test(cleanPhone)) {
+                                    isValid = false;
+                                    error = 'Format de téléphone invalide.';
+                                }
+                            }
+                            break;
+                            
+                        case 'message':
+                            if (value.length < (options.min || 10)) {
+                                isValid = false;
+                                error = `Minimum ${options.min} caractères.`;
+                            }
+                            break;
+                    }
+                }
+                
+                if (!isValid && errorElement) {
+                    field.classList.add('is-invalid');
+                    errorElement.textContent = error;
+                    errorElement.classList.remove('d-none');
+                }
+                
+                return isValid;
+            }
+            
+            function clearFieldError(field) {
+                const fieldId = field.id;
+                const errorElement = document.getElementById(fieldId + 'Error');
+                
+                if (field.classList.contains('is-invalid')) {
+                    field.classList.remove('is-invalid');
+                }
+                
+                if (errorElement) {
+                    errorElement.classList.add('d-none');
+                }
+            }
+            
+            function getFormData() {
+                const formData = new FormData(contactForm);
+                const data = {};
+                
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                
+                data.timestamp = new Date().toLocaleString('fr-FR');
+                data.page = window.location.href;
+                data.userAgent = navigator.userAgent;
+                
+                return data;
+            }
+            
+            async function sendEmail(formData) {
+                const subject = `[Contact] ${getSubjectLabel(formData.subject)} - ${formData.firstName} ${formData.lastName}`;
+                
+                const body = `
+Nouveau message depuis le formulaire de contact:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INFORMATIONS PERSONNELLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Nom complet: ${formData.firstName} ${formData.lastName}
+📧 Email: ${formData.email}
+📞 Téléphone: ${formData.phone || 'Non fourni'}
+📋 Sujet: ${getSubjectLabel(formData.subject)}
+📬 Newsletter: ${formData.newsletter === 'yes' ? 'OUI' : 'NON'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MESSAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${formData.message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MÉTADONNÉES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 Page: ${formData.page}
+⏰ Date: ${formData.timestamp}
+📱 Navigateur: ${formData.userAgent}
+                `.trim();
+                
+                const mailtoLink = `mailto:${YOUR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                window.location.href = mailtoLink;
+                
+                return Promise.resolve();
+            }
+            
+            function getSubjectLabel(subject) {
+                const labels = {
+                    'support': 'Support technique',
+                    'book': 'Question sur le livre',
+                    'payment': 'Problème de paiement',
+                    'partnership': 'Proposition de partenariat',
+                    'other': 'Autre sujet'
+                };
+                return labels[subject] || subject;
+            }
+            
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    submitBtn.disabled = true;
+                    submitText.classList.add('d-none');
+                    submitLoading.classList.remove('d-none');
+                } else {
+                    submitBtn.disabled = false;
+                    submitText.classList.remove('d-none');
+                    submitLoading.classList.add('d-none');
+                }
+            }
+            
+            function showSuccess() {
+                errorAlert.classList.add('d-none');
+                successAlert.classList.remove('d-none');
+                
+                setTimeout(() => {
+                    successAlert.classList.add('d-none');
+                }, 10000);
+            }
+            
+            function showError(message) {
+                successAlert.classList.add('d-none');
+                errorMessage.textContent = message;
+                errorAlert.classList.remove('d-none');
+                
+                setTimeout(() => {
+                    errorAlert.classList.add('d-none');
+                }, 10000);
+            }
+            
+            // Alternative WhatsApp
+            document.querySelector('.whatsapp-btn').addEventListener('click', function(e) {
+                const firstName = document.getElementById('firstName').value || '';
+                const lastName = document.getElementById('lastName').value || '';
+                const subject = document.getElementById('subject').value || '';
+                
+                if (firstName || lastName || subject) {
+                    const message = `Bonjour ! Je m'appelle ${firstName} ${lastName}. Je vous contacte à propos de : ${getSubjectLabel(subject)}.`;
+                    this.href = `https://wa.me/221781234567?text=${encodeURIComponent(message)}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
