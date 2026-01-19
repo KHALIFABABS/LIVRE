@@ -995,4 +995,16 @@ Nous vous remercions pour votre confiance !
 
 Cordialement,
 Mouhamadou R. SONKO
-A
+Auteur de "Comment Parler en Public"
+            `.trim();
+            
+            // Ouvrir le client email
+            const mailtoLink = `mailto:${data.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+            
+            // Afficher un message de confirmation
+            alert('Merci ! Votre commande a été enregistrée. Vérifiez votre email pour les détails.');
+        });
+    </script>
+</body>
+</html>
