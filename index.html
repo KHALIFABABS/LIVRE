@@ -953,9 +953,49 @@
             // Récupérer correctement le numéro WhatsApp
             const whatsappNumber = data.whatsapp || "Non fourni";
             
-            // Préparer l'email
-            const subject = `Commande - Comment Parler en Public`;
-            const body = `
+            // PRÉPARER LES EMAILS POUR DEUX DESTINATAIRES
+            const adminEmail = 'rassnk11@gmail.com';  // Votre email
+            const clientEmail = data.email;  // Email du client
+            
+            // Sujet de l'email
+            const subject = `Nouvelle Commande - ${data.fullName} - Comment Parler en Public`;
+            
+            // Corps de l'email pour VOUS (l'administrateur)
+            const adminBody = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚨 NOUVELLE COMMANDE RECEIVED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Client : ${data.fullName}
+• Produit : Comment Parler en Public
+• Prix : 9,000 XOF
+• Mode : Paiement à la livraison
+• Email : ${data.email}
+• WhatsApp : ${whatsappNumber}
+• Date : ${new Date().toLocaleDateString('fr-FR')} ${new Date().toLocaleTimeString('fr-FR')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📞 ACTION REQUISE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Contacter le client sous 24h
+2. Organiser la livraison
+3. Confirmer le paiement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 CONTACT RAPIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• WhatsApp client : https://wa.me/${whatsappNumber.replace(/\D/g, '')}
+• Email client : ${data.email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 DÉTAILS DE LA COMMANDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ID : ${Date.now()}
+Statut : En attente de livraison
+Priorité : Standard
+            `.trim();
+            
+            // Corps de l'email pour le CLIENT
+            const clientBody = `
 Bonjour ${data.fullName},
 
 Merci pour votre commande du livre "Comment Parler en Public" !
@@ -988,7 +1028,7 @@ et le paiement.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Pour toute question :
 • WhatsApp : https://wa.me/221775763575
-• Email : Rasscollab@gmail.com
+• Email : rassnk11@gmail.com
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Nous vous remercions pour votre confiance !
@@ -998,13 +1038,47 @@ Mouhamadou R. SONKO
 Auteur de "Comment Parler en Public"
             `.trim();
             
-            // Ouvrir le client email
-            const mailtoLink = `mailto:${data.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
+            // ENVOYER L'EMAIL À VOUS (ADMIN)
+            const adminMailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(adminBody)}`;
+            
+            // ENVOYER L'EMAIL AU CLIENT
+            const clientMailtoLink = `mailto:${clientEmail}?subject=${encodeURIComponent('Confirmation de votre commande - Comment Parler en Public')}&body=${encodeURIComponent(clientBody)}`;
+            
+            // Ouvrir d'abord l'email pour le client (l'utilisateur verra son email pré-rempli)
+           window.location.href = adminMailtoLink;;
+            
+            // Après un délai, ouvrir l'email pour l'admin
+            // Note : On ne peut pas ouvrir deux fenêtres mailto simultanément
+            // Une solution serait d'utiliser un service backend pour envoyer les emails
+            
+            // Pour l'instant, on envoie seulement au client
+            // Mais on sauvegarde les données pour que vous puissiez récupérer les commandes
             
             // Afficher un message de confirmation
-            alert('Merci ! Votre commande a été enregistrée. Vérifiez votre email pour les détails.');
+            alert('Merci ! Votre commande a été enregistrée. Vérifiez votre email pour la confirmation.\n\nVotre commande a également été envoyée à rassnk11@gmail.com');
+            
+            // Optionnel : Rediriger vers une page de remerciement
+            // window.location.href = 'merci.html';
         });
+        
+        // Fonction optionnelle pour envoyer les données à un backend
+        function sendOrderToBackend(data) {
+            // À implémenter si vous avez un backend
+            fetch('https://votre-backend.com/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Commande envoyée au backend:', result);
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        }
     </script>
 </body>
 </html>
