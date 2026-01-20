@@ -765,8 +765,8 @@
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label class="form-label">Adresse email *</label>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <label class="form-label">Adresse domicile *</label>
+                                        <input type="text" class="form-control" name="email" required>
                                     </div>
                                     
                                     <div class="mb-3">
@@ -840,7 +840,10 @@
                             <i class="fab fa-whatsapp me-2" style="color: #25D366;"></i>
                             +221 77 576 35 75 
                         </li>
-                       
+                        <li class="mb-3" style="color: rgba(255, 255, 255, 0.7);">
+                            <i class="fas fa-clock me-2" style="color: #FF8E53;"></i>
+                            Lundi - Samedi, 9h - 20h
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -966,22 +969,9 @@
 • Produit : Comment Parler en Public
 • Prix : 9,000 XOF
 • Mode : Paiement à la livraison
-• Email : ${data.email}
+• domicile : ${data.email}
 • WhatsApp : ${whatsappNumber}
 • Date : ${new Date().toLocaleDateString('fr-FR')} ${new Date().toLocaleTimeString('fr-FR')}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📞 ACTION REQUISE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Contacter le client sous 24h
-2. Organiser la livraison
-3. Confirmer le paiement
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬 CONTACT RAPIDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• WhatsApp client : https://wa.me/${whatsappNumber.replace(/\D/g, '')}
-• Email client : ${data.email}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📋 DÉTAILS DE LA COMMANDE
