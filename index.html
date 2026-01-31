@@ -933,120 +933,35 @@
         
         // Form Submission
         document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Récupérer les données du formulaire
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            
-            // Ajouter des informations supplémentaires
-            data.product = "Comment Parler en Public";
-            data.price = "9,000 XOF";
-            data.timestamp = new Date().toISOString();
-            
-            // Sauvegarder les données
-            localStorage.setItem('orderData', JSON.stringify(data));
-            
-            // Récupérer correctement le numéro WhatsApp
-            const whatsappNumber = data.whatsapp || "Non fourni";
-            
-            // PRÉPARER LES EMAILS POUR DEUX DESTINATAIRES
-            const adminEmail = 'rassnk11@gmail.com';  // Votre email
-            const clientEmail = data.email;  // Email du client
-            
-            // Sujet de l'email
-            const subject = `Nouvelle Commande - ${data.fullName} - Comment Parler en Public`;
-            
-            // Corps de l'email pour VOUS (l'administrateur)
-            const adminBody = `
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚨 NOUVELLE COMMANDE RECEIVED
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Client : ${data.fullName}
-• Produit : Comment Parler en Public
-• Prix : 9,000 XOF
-• Mode : Paiement à la livraison
-• domicile : ${data.email}
-• WhatsApp : ${whatsappNumber}
-• Date : ${new Date().toLocaleDateString('fr-FR')} ${new Date().toLocaleTimeString('fr-FR')}
+    e.preventDefault();
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 DÉTAILS DE LA COMMANDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ID : ${Date.now()}
-Statut : En attente de livraison
-Priorité : Standard
-            `.trim();
-            
-            // Corps de l'email pour le CLIENT
-            const clientBody = `
-Bonjour ${data.fullName},
+    // Récupération des champs nécessaires UNIQUEMENT
+    const fullName = this.fullName.value.trim();
+    const address = this.email.value.trim(); // utilisé comme adresse domicile
+    const whatsapp = this.whatsapp.value.trim();
 
-Merci pour votre commande du livre "Comment Parler en Public" !
+    // Email de réception (ADMIN)
+    const adminEmail = 'rassnk11@gmail.com';
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 DÉTAILS DE VOTRE COMMANDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Produit : Comment Parler en Public
-• Prix : 9,000 XOF
-• Mode : Paiement à la livraison
-• Nom : ${data.fullName}
-• Email : ${data.email}
-• WhatsApp : ${whatsappNumber}
-• Date : ${new Date().toLocaleDateString('fr-FR')}
+    // Sujet du mail
+    const subject = 'Validation de commande';
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚚 LIVRAISON
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Nous vous contacterons sous 24h pour organiser la livraison
-et le paiement.
+    // CORPS DU MAIL (STRICTEMENT LES 3 INFOS)
+    const body = `
+Nom : ${fullName}
+Adresse : ${address}
+Numéro WhatsApp : ${whatsapp}
+    `.trim();
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📱 VOS COORDONNÉES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Email : ${data.email}
-• WhatsApp : ${whatsappNumber}
+    // Lien mailto
+    const mailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💬 CONTACT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Pour toute question :
-• WhatsApp : https://wa.me/221775763575
-• Email : rassnk11@gmail.com
+    // Ouvrir le mail
+    window.location.href = mailtoLink;
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Nous vous remercions pour votre confiance !
-
-Cordialement,
-Mouhamadou R. SONKO
-Auteur de "Comment Parler en Public"
-            `.trim();
-            
-            // ENVOYER L'EMAIL À VOUS (ADMIN)
-            const adminMailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(adminBody)}`;
-            
-            // ENVOYER L'EMAIL AU CLIENT
-            const clientMailtoLink = `mailto:${clientEmail}?subject=${encodeURIComponent('Confirmation de votre commande - Comment Parler en Public')}&body=${encodeURIComponent(clientBody)}`;
-            
-            // Ouvrir d'abord l'email pour le client (l'utilisateur verra son email pré-rempli)
-           window.location.href = adminMailtoLink;;
-            
-            // Après un délai, ouvrir l'email pour l'admin
-            // Note : On ne peut pas ouvrir deux fenêtres mailto simultanément
-            // Une solution serait d'utiliser un service backend pour envoyer les emails
-            
-            // Pour l'instant, on envoie seulement au client
-            // Mais on sauvegarde les données pour que vous puissiez récupérer les commandes
-            
-            // Afficher un message de confirmation
-            alert('Merci ! Votre commande a été enregistrée. Vérifiez votre email pour la confirmation.\n\nVotre commande a également été envoyée à rassnk11@gmail.com');
-            
-            // Optionnel : Rediriger vers une page de remerciement
-            // window.location.href = 'merci.html';
-        });
+    // ALERTE DEMANDÉE
+    alert("ENVOYER LE MAIL POUR VALIDER LA COMMANDE");
+});
         
         // Fonction optionnelle pour envoyer les données à un backend
         function sendOrderToBackend(data) {
